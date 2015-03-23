@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B812276F-1AD8-4EE2-9445-AF94261AD0B1</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TMCache</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>44B36422A7A7C3AD3DE414BC27AA89E3C0009BBA</key>
+		<string>https://github.com/tumblr/TMCache.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>tests/TMCache.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>44B36422A7A7C3AD3DE414BC27AA89E3C0009BBA</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/tumblr/TMCache.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>44B36422A7A7C3AD3DE414BC27AA89E3C0009BBA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>44B36422A7A7C3AD3DE414BC27AA89E3C0009BBA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TMCache</string>
+		</dict>
+	</array>
+</dict>
+</plist>
