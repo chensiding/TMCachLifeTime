@@ -326,4 +326,9 @@ NSTimeInterval TMCacheTestBlockTimeout = 5.0;
     STAssertTrue(objectCount == enumCount, @"some objects were not enumerated");
 }
 
+- (void)testObjectLifetime
+{
+    STAssertTrue(<#expr#>, <#description, ...#>)
+}
+
 @end

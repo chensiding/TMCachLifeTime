@@ -12,20 +12,24 @@
 	<dict>
 		<key>44B36422A7A7C3AD3DE414BC27AA89E3C0009BBA</key>
 		<string>https://github.com/tumblr/TMCache.git</string>
+		<key>79313F0E23EAB1BECD4F5DB8B706BCECB6569671</key>
+		<string>https://github.com/chensiding/TMCachLifeTime.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>tests/TMCache.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>44B36422A7A7C3AD3DE414BC27AA89E3C0009BBA</key>
+		<string>../../../../TMCache</string>
+		<key>79313F0E23EAB1BECD4F5DB8B706BCECB6569671</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/tumblr/TMCache.git</string>
+	<string>https://github.com/chensiding/TMCachLifeTime.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>44B36422A7A7C3AD3DE414BC27AA89E3C0009BBA</string>
+	<string>79313F0E23EAB1BECD4F5DB8B706BCECB6569671</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -35,6 +39,14 @@
 			<string>44B36422A7A7C3AD3DE414BC27AA89E3C0009BBA</string>
 			<key>IDESourceControlWCCName</key>
 			<string>TMCache</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>79313F0E23EAB1BECD4F5DB8B706BCECB6569671</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TMCachLifeTime</string>
 		</dict>
 	</array>
 </dict>
