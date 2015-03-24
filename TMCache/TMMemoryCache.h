@@ -262,6 +262,18 @@ typedef void (^TMMemoryCacheObjectBlock)(TMMemoryCache *cache, NSString *key, id
 - (void)setObject:(id)object forKey:(NSString *)key withCost:(NSUInteger)cost;
 
 /**
+ Stores an object in the cache for the specified key and the specified cost. If the cost causes the total
+ to go over the <costLimit> the cache is trimmed (oldest objects first). This method blocks the calling thread
+ until the object has been stored.
+ 
+ @param object An object to store in the cache.
+ @param key A key to associate with the object. This string will be copied.
+ @param cost An amount to add to the <totalCost>.
+ @param lifetime The lifetime length in second of this object. Object exceed its lifetime will be expired and removed from the cache.
+ */
+- (void)setObject:(id)object forKey:(NSString *)key withCost:(NSUInteger)cost lifetime:(NSUInteger)lifetime;
+
+/**
  Removes the object for the specified key. This method blocks the calling thread until the object
  has been removed.
  

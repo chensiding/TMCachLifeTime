@@ -430,6 +430,20 @@ static float const kExpirePercentageThresholdPerLoop = 0.25;
     });
 }
 
+- (void)trimExpiredObjects
+{
+    for(int i=0; i< [_expireTimes.allKeys count]; i++){
+        NSString *key = [_expireTimes.allKeys objectAtIndex:i];
+        
+        NSDate *now = [NSDate date];
+        NSDate *expireTime = [_expireTimes objectForKey:key];
+        
+        if([expireTime compare:now] == NSOrderedAscending){
+            [self removeFileAndExecuteBlocksForKey:key];
+        }
+    }
+}
+
 - (void)trimExpiredObjectsBySampling
 {
     while(true){
@@ -459,7 +473,12 @@ static float const kExpirePercentageThresholdPerLoop = 0.25;
     if (_expireTimes.allKeys.count == 0)
         return;
     
-    [self trimExpiredObjectsBySampling];
+    if(_expireTimes.allKeys.count <= kExpireLookupsPerLoop){
+        [self trimExpiredObjects];
+    }
+    else{
+        [self trimExpiredObjectsBySampling];
+    }
     
     __weak TMDiskCache *weakSelf = self;
     
@@ -473,7 +492,7 @@ static float const kExpirePercentageThresholdPerLoop = 0.25;
         
         dispatch_barrier_async(strongSelf->_queue, ^{
             TMDiskCache *strongSelf = weakSelf;
-            [strongSelf trimExpiredObjectsBySampling];
+            [strongSelf trimExpiredObjectsRecursively];
         });
     });
 }

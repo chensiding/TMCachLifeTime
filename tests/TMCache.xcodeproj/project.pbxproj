@@ -360,6 +360,9 @@
 					6629FFEC1A66B512009C10BD = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
+					D07F1ED1171AFB7A001DBA02 = {
+						TestTargetID = D07F1EB1171AFB7A001DBA02;
+					};
 				};
 			};
 			buildConfigurationList = D07F1EAD171AFB7A001DBA02 /* Build configuration list for PBXProject "TMCache" */;
@@ -721,7 +724,8 @@
 		D07F1EE8171AFB7A001DBA02 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TMCache.app/TMCache";
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CHEN Siding (4LBUMRCAMZ)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -730,7 +734,8 @@
 				GCC_PREFIX_HEADER = "TMCache/TMCache-Prefix.pch";
 				INFOPLIST_FILE = "TMCacheTests/TMCacheTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
+				PROVISIONING_PROFILE = "3dffe0ae-1b06-447d-9efc-d0ae4aea07f4";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TMCache.app/TMCache";
 				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -739,7 +744,8 @@
 		D07F1EE9171AFB7A001DBA02 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TMCache.app/TMCache";
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CHEN Siding (4LBUMRCAMZ)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -748,7 +754,8 @@
 				GCC_PREFIX_HEADER = "TMCache/TMCache-Prefix.pch";
 				INFOPLIST_FILE = "TMCacheTests/TMCacheTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
+				PROVISIONING_PROFILE = "3dffe0ae-1b06-447d-9efc-d0ae4aea07f4";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TMCache.app/TMCache";
 				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -764,6 +771,7 @@
 				662900081A66B513009C10BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6629002A1A66B60D009C10BD /* Build configuration list for PBXNativeTarget "OS X" */ = {
 			isa = XCConfigurationList;
@@ -772,6 +780,7 @@
 				6629002C1A66B60D009C10BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D07F1EAD171AFB7A001DBA02 /* Build configuration list for PBXProject "TMCache" */ = {
 			isa = XCConfigurationList;

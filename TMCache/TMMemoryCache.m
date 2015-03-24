@@ -232,11 +232,26 @@ static float const kExpirePercentageThresholdPerLoop = 0.25;
     });
 }
 
+- (void)trimExpiredObjects
+{
+    for(int i=0; i< [_expireTimes.allKeys count]; i++){
+        NSString *key = [_expireTimes.allKeys objectAtIndex:i];
+        
+        NSDate *now = [NSDate date];
+        NSDate *expireTime = [_expireTimes objectForKey:key];
+        
+        if([expireTime compare:now] == NSOrderedAscending){
+            //NSLog(@"expired object cleaned %@", key);
+            [self removeObjectAndExecuteBlocksForKey:key];
+        }
+    }
+}
+
 - (void)trimExpiredObjectsBySampling
 {
     while(true){
         NSUInteger expireObjecCount = 0;
-        for(int i=0; i< kExpireLookupsPerLoop; i++){
+        for(int i=0; i< kExpireLookupsPerLoop && i < [_expireTimes.allKeys count]; i++){
             NSUInteger len = [_expireTimes.allKeys count];
             NSUInteger index = arc4random() % len;
             NSString *key = [_expireTimes.allKeys objectAtIndex:index];
@@ -245,6 +260,7 @@ static float const kExpirePercentageThresholdPerLoop = 0.25;
             NSDate *expireTime = [_expireTimes objectForKey:key];
             
             if([expireTime compare:now] == NSOrderedAscending){
+                //NSLog(@"expired object cleaned %@", key);
                 [self removeObjectAndExecuteBlocksForKey:key];
                 expireObjecCount ++;
             }
@@ -261,7 +277,12 @@ static float const kExpirePercentageThresholdPerLoop = 0.25;
     if (_expireTimes.allKeys.count == 0)
         return;
     
-    [self trimExpiredObjectsBySampling];
+    if(_expireTimes.allKeys.count <= kExpireLookupsPerLoop){
+        [self trimExpiredObjects];
+    }
+    else{
+        [self trimExpiredObjectsBySampling];
+    }
     
     __weak TMMemoryCache *weakSelf = self;
     
@@ -275,7 +296,7 @@ static float const kExpirePercentageThresholdPerLoop = 0.25;
         
         dispatch_barrier_async(strongSelf->_queue, ^{
             TMMemoryCache *strongSelf = weakSelf;
-            [strongSelf trimExpiredObjectsBySampling];
+            [strongSelf trimExpiredObjectsRecursively];
         });
     });
 }
@@ -284,8 +305,6 @@ static float const kExpirePercentageThresholdPerLoop = 0.25;
 
 - (void)objectForKey:(NSString *)key block:(TMMemoryCacheObjectBlock)block
 {
-    NSDate *now = [[NSDate alloc] init];
-    
     if (!key || !block)
         return;
 
@@ -299,13 +318,14 @@ static float const kExpirePercentageThresholdPerLoop = 0.25;
         id object = nil;
         // lazy mode for expiration
         NSDate *expireTime = [strongSelf->_expireTimes objectForKey:key];
+        NSDate *now = [[NSDate alloc] init];
         
         if(expireTime != nil && [expireTime compare:now] == NSOrderedAscending){
             [self removeObjectAndExecuteBlocksForKey:key];
             object = nil;
         }
         else{
-            [strongSelf->_dictionary objectForKey:key];
+            object = [strongSelf->_dictionary objectForKey:key];
         }
         
         if (object) {
@@ -553,6 +573,7 @@ static float const kExpirePercentageThresholdPerLoop = 0.25;
 
     [self objectForKey:key block:^(TMMemoryCache *cache, NSString *key, id object) {
         objectForKey = object;
+        NSLog(@"returned obj for key %@ is %@", key, object);
         dispatch_semaphore_signal(semaphore);
     }];
 
@@ -572,20 +593,7 @@ static float const kExpirePercentageThresholdPerLoop = 0.25;
 
 - (void)setObject:(id)object forKey:(NSString *)key withCost:(NSUInteger)cost
 {
-    if (!object || !key)
-        return;
-
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-
-    [self setObject:object forKey:key withCost:cost block:^(TMMemoryCache *cache, NSString *key, id object) {
-        dispatch_semaphore_signal(semaphore);
-    }];
-
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-
-    #if !OS_OBJECT_USE_OBJC
-    dispatch_release(semaphore);
-    #endif
+    [self setObject:object forKey:key withCost:cost lifetime:0];
 }
 
 - (void)setObject:(id)object forKey:(NSString *)key withCost:(NSUInteger)cost lifetime:(NSUInteger)lifetime
